@@ -1,0 +1,11 @@
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /person once
+// the user hits Submit
+block navbarcontent
+	
+block content
+	hr.featurette-divider
+	.container			
+		div(align="center")
+			+carousel("center",[{image:"images/img-team.jpg",button:{caption:"Go to team page",url:"/team"}},{image:"images/img-player.jpg",button:{caption:"Search for players",url:"/searchplayer"}},{image:"images/img-question.jpg",button:{caption:"Interesting Questions",url:"/others"}},{image:"images/mapImage.jpg",button:{caption:"Show map statistics",url:"/map"}}])

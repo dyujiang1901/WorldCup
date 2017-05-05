@@ -1,0 +1,13 @@
+// Inherits from layout 
+extend layout
+
+block navbarcontent
+	+nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Maps",href:"/map"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],5)
+
+block content
+	div(align="center")
+		h2 Latest tweets about World Cup
+		a.twitter-timeline(href="https://twitter.com/search?q=%23WorldCup%20%23FIFA" data-widget-id="848680882462392320") #WorldCup #FIFA
+		script.
+			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+

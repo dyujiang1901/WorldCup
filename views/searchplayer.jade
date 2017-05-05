@@ -1,0 +1,50 @@
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /person once
+// the user hits Submit
+block navbarcontent
+    +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Maps",href:"/map"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],2)
+
+block content
+  .container
+    p
+      h2
+        |  Please select conditions:
+      h4  
+        form(method="get", action="/players")
+          | Nation    
+          select(name = "nation")
+            option(value = "")
+            - for (var inx = 0; inx < results.nation.length; inx++)
+              option #{results.nation[inx]}
+          br
+          br
+          | Position    
+          select(name = "position")
+            option(value="")
+            - for (var inx = 0; inx < results.position.length; inx++)
+              option #{results.position[inx]}
+            br
+            br
+            | Number    
+            select(name = "number")
+              option(value="")
+              - for (var inx = 0; inx < results.pnumber.length; inx++)
+                option #{results.pnumber[inx]}
+            br
+            br
+            | Club     
+            select(name = "club")
+              option(value="")
+              - for (var inx = 0; inx < results.club.length; inx++)
+                option #{results.club[inx]}
+            br
+            br
+            | IsCaptain  
+            select(name = "isCaptain")
+              option(value="")
+              - for (var inx = 0; inx < results.isCaptain.length; inx++)
+                option #{results.isCaptain[inx]}
+          br
+          br
+          input(type='submit', value='Show Players')

@@ -1,0 +1,326 @@
+extend layout
+block navbarcontent
+  +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Maps",href:"/map"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],3)
+
+block content  
+  .container  
+    +tab-list(["Goals","LostGoals","RedCards","YellowCards","goalClub","playerClub","yellowClub"],0,"false")
+        +tab("Goals","dropdown")
+          +accordion-item-default("Total goals for each country","sample","true")
+            div(allign="center")
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container1(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container1'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data.goal,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map.legend();
+                window.addEventListener('resize', function() {
+                  map.resize();
+                });
+        +tab("LostGoals","dropdown")
+          +accordion-item-default("Total goals lost for each country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container2(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container2'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data.lost,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map.legend();
+                window.addEventListener('resize',function() {
+                  map.resize();
+                });
+        +tab("RedCards","dropdown")
+          +accordion-item-default("Total red cards for each country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              // I recommend you host this file on your own, since this will change without warning
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container3(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container3'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data.red,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map.legend();
+                window.addEventListener('resize', function() {
+                  map.resize();
+                });
+        +tab("YellowCards","active")
+          +accordion-item-default("Total yellow cards for each country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container4(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data1 =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map1 = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container4'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data1.yellow,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map1.legend();
+                window.addEventListener('resize', function() {
+                  map1.resize();
+                });
+        +tab("goalClub","active")
+          +accordion-item-default("Total goals for players in each club country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container5(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data2 =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map2 = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container5'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data2.goalClub,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map2.legend();
+                window.addEventListener('resize',function() {
+                  map2.resize();
+                });
+        +tab("playerClub","active")
+          +accordion-item-default("Number of players in each club country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              // I recommend you host this file on your own, since this will change without warning
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container6(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container6'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data.playerClub,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map.legend();
+                window.addEventListener('resize', function() {
+                  map.resize();
+                });
+        +tab("yellowClub","active")
+          +accordion-item-default("Total yellow cards of each club country","sample","true")
+            div
+              script(src='http://d3js.org/d3.v3.min.js')
+              script(src='http://d3js.org/topojson.v1.min.js')
+              // I recommend you host this file on your own, since this will change without warning
+              script(src = 'http://datamaps.github.io/scripts/datamaps.world.min.js?v=1')
+              #container7(style='position: relative; width: 80%; max-height: 450px;')
+              script.
+                var local_data =!{JSON.stringify(data_sum)};
+                //basic map config with custom fills, mercator projection
+                var map = new Datamap({
+                scope: 'world',
+                element: document.getElementById('container7'),
+                projection: 'mercator',
+                height: null,
+                responsive: true,
+                fills: {
+                defaultFill: 'rgba(194,194,194,0.9)',
+                'first class': 'rgba(102,0,0,0.9)',
+                'second class': 'rgba(153,0,0,0.9)',
+                'third class': 'rgba(204,0,0,0.9)',
+                'fourth class': 'rgba(255,0,0,0.9)',
+                'fifth class': 'rgba(255,51,51,0.9)',
+                'sixth class': 'rgba(255,102,102,0.9)',
+                'seventh class': 'rgba(255,153,153,0.9)',
+                'eighth class': 'rgba(255,204,204,0.9)'
+                },
+                data: local_data.yellowClub,
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                if(!data)
+                {
+                return '<div class="hoverinfo"><strong>'+geo.properties.name+' doesn\'t participate in this tournament</strong></div>'
+                }
+                return ['<div class="hoverinfo"><strong>',
+                geo.properties.name +
+                ': ' + data.numberOfThings,
+                '</strong></div>'].join('');
+                }
+                }
+                });
+                map.legend();
+                window.addEventListener('resize', function() {
+                  map.resize();
+                });
+            

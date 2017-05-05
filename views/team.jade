@@ -1,0 +1,124 @@
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /person once
+// the user hits Submit
+block navbarcontent
+    +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Maps",href:"/map"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],1)
+
+
+block content
+    p
+        .container.Team
+            +accordion-item-default("Team A","sample","true")
+                div(align="center","width:100%")
+                    .col-sm-3
+                        a(href="./teamDetail?name=" + "Brazil") #{"Brazil"}
+                            img.featurette-image.img-circle.center-block(src="images/Brazil.png",alt='Generic placeholder image', width = '160', height='100')    
+                                
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Mexico") #{"Mexico"} 
+                            img.featurette-image.img-circle.center-block(src="images/Mexico.png",alt='Generic placeholder image', width = '160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Croatia") #{"Croatia"}
+                            img.featurette-image.img-circle.center-block(src="images/Croatia.png",alt='Generic placeholder image',width = '160', height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Cameroon") #{"Cameroon"}
+                            img.featurette-image.img-circle.center-block(src="images/Cameroon.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team B","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Netherlands") #{"Netherlands"}
+                            img.featurette-image.img-circle.center-block(src="images/Netherlands.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Chile") #{"Chile"}
+                            img.featurette-image.img-circle.center-block(src="images/Chile.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Spain") #{"Spain"}
+                            img.featurette-image.img-circle.center-block(src="images/Spain.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Australia") #{"Australia"}
+                            img.featurette-image.img-circle.center-block(src="images/Australia.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team C","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Colombia") #{"Colombia"}
+                            img.featurette-image.img-circle.center-block(src="images/Colombia.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Greece") #{"Greece"}
+                            img.featurette-image.img-circle.center-block(src="images/Greece.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Ivory Coast") #{"Ivory Coast"}
+                            img.featurette-image.img-circle.center-block(src="images/Ivory Coast.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Japan") #{"Japan"}
+                            img.featurette-image.img-circle.center-block(src="images/Japan.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team D","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Costa Rica") #{"Costa Rica"}
+                            img.featurette-image.img-circle.center-block(src="images/Costa Rica.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Uruguay") #{"Uruguay"}
+                            img.featurette-image.img-circle.center-block(src="images/Uruguay.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Italy") #{"Italy"}
+                            img.featurette-image.img-circle.center-block(src="images/Italy.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "England") #{"England"}
+                            img.featurette-image.img-circle.center-block(src="images/England.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team E","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "France") #{"France"}
+                            img.featurette-image.img-circle.center-block(src="images/France.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Switzerland") #{"Switzerland"}
+                            img.featurette-image.img-circle.center-block(src="images/Switzerland.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Ecuador") #{"Ecuador"}
+                            img.featurette-image.img-circle.center-block(src="images/Ecuador.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Honduras") #{"Honduras"}
+                            img.featurette-image.img-circle.center-block(src="images/Honduras.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team F","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Argentina") #{"Argentina"}
+                            img.featurette-image.img-circle.center-block(src="images/Argentina.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Nigeria") #{"Nigeria"}
+                            img.featurette-image.img-circle.center-block(src="images/Nigeria.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Bosnia and Herzegovina") #{"Bosnia and Herzegovina"} 
+                            img.featurette-image.img-circle.center-block(src="images/Bosnia and Herzegovina.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Iran") #{"Iran"}
+                            img.featurette-image.img-circle.center-block(src="images/Iran.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team G","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Germany") #{"Germany"}
+                            img.featurette-image.img-circle.center-block(src="images/Germany.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "United States") #{"United States"}
+                            img.featurette-image.img-circle.center-block(src="images/United States.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Portugal") #{"Portual"}
+                            img.featurette-image.img-circle.center-block(src="images/Portugal.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Ghana") #{"Ghana"}
+                            img.featurette-image.img-circle.center-block(src="images/Ghana.png",alt='Generic placeholder image', width='160',height='100')
+            +accordion-item-default("Team H","sample","true")
+                div(align="center","width:100%")
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Belgium") #{"Belgium"}
+                            img.featurette-image.img-circle.center-block(src="images/Belgium.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Algeria") #{"Algeria"}
+                            img.featurette-image.img-circle.center-block(src="images/Algeria.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "Russia") #{"Russia"}
+                            img.featurette-image.img-circle.center-block(src="images/Russia.png",alt='Generic placeholder image', width='160',height='100')
+                    .col-md-3
+                        a(href="./teamDetail?name=" + "South Korea") #{"South Korea"}
+                            img.featurette-image.img-circle.center-block(src="images/South Korea.png",alt='Generic placeholder image', width='160',height='100')

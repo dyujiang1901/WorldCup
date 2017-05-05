@@ -1,0 +1,65 @@
+// Jade file to specify output of a persons list
+// Inherits from layout
+extend layout
+block navbarcontent
+    +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],-1)
+block content
+ .container
+    h4   Which players got a specific number of goals? (please input number only)
+    p
+      form(method='get', action='/others_a0')
+        input(name='number', value='')
+        input(type='submit', value='Show Player')
+    br
+    h4   Which players got a specific number of yellow cards? (please input number only)
+    p
+      form(method='get', action='/others_a2')
+        input(name='number', value='')
+        input(type='submit', value='Show Player')
+    br
+    h4   Which clubs have a specific number of players participated in world cup? (please input number only)
+    p
+      form(method='get', action='/others_a4')
+        input(name='number', value='')
+        input(type='submit', value='Show Club')
+    br
+    h4  The total scores lost for a certain team in World Cup? (please select team)
+    p
+      form(method="get", action="/others_a3")
+        select(name = "country")
+          - for (var inx = 0; inx < results.length; inx ++)
+            option #{results[inx][0]}
+        input(type='submit', value='Show Score')
+    br
+    h4   Please select the question you are interested in
+    p
+      form(method='get', action='/others_a1')
+        select(name = "ques")
+          - for (var inx = 0; inx < question.length; inx ++)
+            option #{question[inx]}
+        input(type='submit', value='Show Answer')
+      br
+      +accordion-item-default(ques1,"sample","true")
+        div-align
+        table(style="width:100%",border='0')
+          - for (var inx = 0; inx < (results1.length - results1.length%4)/4; inx++)
+            tr
+            .col-sm-3
+              td
+                a(href="./teamDetail?name="+results1[inx*4][0]) #{results1[inx*4][0]} 
+              td &nbsp; 
+              td
+                a(href="./teamDetail?name="+results1[inx*4 +1 ][0]) #{results1[inx*4 + 1][0]} 
+              td &nbsp; 
+              td
+                a(href="./teamDetail?name="+results1[inx*4 + 2][0]) #{results1[inx*4 + 2][0]} 
+              td &nbsp; 
+              td
+                a(href="./teamDetail?name="+results1[inx*4 + 3][0]) #{results1[inx*4 +3 ][0]} 
+              td &nbsp;
+            tr
+          - for (var inx = 0; inx < results1.length%4; inx++)
+              td=results1[results1.length - 1 - inx][0]
+              td &nbsp;     
+    form(method='get', action='/others')
+        input(type='submit', value='Hide')

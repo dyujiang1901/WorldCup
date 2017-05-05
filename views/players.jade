@@ -1,0 +1,27 @@
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /person once
+// the user hits Submit
+block navbarcontent
+  +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],-1)
+
+block content
+  .container
+    if(results.length > 0)
+      h2
+        p
+        |  Please select the full name of player:    
+      form(method="get", action="/player")
+        p
+          select(name = "fullname")
+            option(value="")
+            -for (var inx = 0; inx < results.length; inx++)
+              option #{results[inx]}
+        input(type='submit', value='Search')
+    else
+      div(align="center") 
+        h1 
+          +alert-i-danger("Not Found!") 
+        form(method='get', action='/searchplayer')
+          +submit-primary("Search Again")
+

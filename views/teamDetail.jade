@@ -1,0 +1,178 @@
+// Jade file to specify output of a persons list
+// Inherits from layout
+extend layout
+
+block navbarcontent
+  +nav-tabs-justified([{text:"Home",href:"/"},{text:"Team",href:"/team"},{text:"Player",href:"/searchplayer"},{text:"Maps",href:"/map"},{text:"Other",href:"/others"},{text:"tweets",href:"/tweets"}],1)
+
+block content
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js')
+  p
+    div(align="center")
+    .container
+      .row
+        .col-lg-6
+          img.featurette-image.img-responsive(src= "images/"+"#{results.team.rows[0][0]}"+".png",alt='Generic placeholder image', width='300',height='200')
+        .col-lg-6
+          img.featurette-image.img-responsive(src= "images/team/"+"#{results.team.rows[0][0]}"+".jpg",alt='Generic placeholder image', width='350',height='350')
+      hr.featurette-divider
+      +tab-list(["Information","Players","Matches"],0,"true")
+          +tab("Information","active")
+            +accordion-item-default("Team information","sample","true")
+              .col-sm-2
+                +panel-default("Nation") 
+                  td=results.team.rows[0][0]
+              .col-sm-3
+                +panel-default("Fifa code") 
+                  td=results.team.rows[0][1]
+              .col-sm-3
+                +panel-default("Competation") 
+                  td=results.team.rows[0][2]
+              .col-sm-4
+                +panel-default("Year") 
+                  td=results.team.rows[0][3]
+              div(align="center")
+                h2 Rank History 
+                div
+                  canvas#myChart
+              script.
+                var timelabel = !{JSON.stringify(results.timeline)}
+                var ranklabel = !{JSON.stringify(results.rankline)}
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                labels: timelabel,
+                datasets: [{
+                label: 'World Rank',
+                data: ranklabel,
+                backgroundColor: "rgba(0,255,255,0.6)"
+                }]}});
+          +tab("Players")
+            +accordion-item-default("Players List","sample","true")
+              table(style="width:100%",border='0')
+                tr
+                .col-sm-3
+                  th="NO."
+                  th  &nbsp;
+                  th="Position"
+                  th &nbsp;
+                  th="Full Name"
+                  th &nbsp;
+                  th="Club"
+                  th &nbsp;
+                  th="ClubCountry"
+                  th &nbsp;
+                  th="Age"
+                  th &nbsp;
+                  th="Is Captain"
+                  th &nbsp;
+                tr
+                .col-sm-3
+                  td="    "
+                  td &nbsp;
+                  td="        "
+                  td &nbsp;
+                  td="         "
+                  td &nbsp;
+                  td="    "
+                  td &nbsp;
+                  td="           "
+                  td &nbsp;
+                  td="          "
+                  td &nbsp;
+                - for (var inx = 0; inx < results.team.rows.length; inx++)
+                  tr
+                    td=results.team.rows[inx][5]
+                    td &nbsp;
+                    td=results.team.rows[inx][6]
+                    td &nbsp;
+                    td
+                      a(href="./player?fullname=" + results.team.rows[inx][7]) #{results.team.rows[inx][7]}
+                    td &nbsp; 
+                    td=results.team.rows[inx][8]
+                    td &nbsp;
+                    td=results.team.rows[inx][9]
+                    td &nbsp;
+                    td=results.team.rows[inx][10]
+                    td &nbsp;
+                    td=results.team.rows[inx][11]
+                    td &nbsp;
+          +tab("Matches")
+            +accordion-item-default("Matches","sample","true")
+              - for (var inx = 0; inx < results.matches.rows.length; inx++)
+                +accordion-item-default("Match " + (inx+1),"sample","true")
+                  div(align="center","width:100%")
+                    .col-sm-2
+                      h3
+                       a(href="./teamDetail?name="+results.matches.rows[inx][2]) #{results.matches.rows[inx][2]}
+                    .col-md-2
+                      a(href="./teamDetail?name="+results.matches.rows[inx][2]) 
+                        img.featurette-image.img-circle.center-block(src="images/"+"#{results.matches.rows[inx][2]}"+".png",alt='Generic placeholder image', width='150',height='120')
+                    .col-md-1  
+                      h1
+                        -if (results.matches.rows[inx][7]!= null){var s = results.matches.rows[inx][3]+"("+results.matches.rows[inx][7]+")"} else{var s = results.matches.rows[inx][3]}                       
+                        td=s
+                        td &nbsp;
+                    .col-md-1
+                      h1
+                       td :
+                       td &nbsp;
+                    .col-md-1
+                      h1
+                        -if (results.matches.rows[inx][8]!= null){var s = results.matches.rows[inx][5]+"("+results.matches.rows[inx][8]+")"} else{var s = results.matches.rows[inx][5]} 
+                        th=s
+                        th &nbsp;
+                    .col-md-2
+                      a(href="./teamDetail?name="+results.matches.rows[inx][4]) 
+                        img.featurette-image.img-circle.center-block(src="images/"+"#{results.matches.rows[inx][4]}"+".png",alt='Generic placeholder image', width='150',height='120')              
+                    .col-sm-2
+                      h3
+                        a(href="./teamDetail?name=" + results.matches.rows[inx][4]) #{results.matches.rows[inx][4]} 
+
+
+              // table
+              //   tr
+              //     th="Match ID"
+              //     td &nbsp;
+              //     th="Home Team"
+              //     td &nbsp;
+              //     th="Home Team Goal"
+              //     td &nbsp;
+              //     th="Away Team"
+              //     td &nbsp;
+              //     th="Away Team Goal"
+              //     td &nbsp;
+              //     th="Winner"
+              //     td &nbsp;      
+              //     th="Home Team Penalty"
+              //     td &nbsp; 
+              //     th="Away Team Penalty"
+              //     td &nbsp; 
+
+              //   - for (var inx = 0; inx < results.matches.rows.length; inx++)
+                  // tr
+
+                    // td=results.matches.rows[inx][0]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][2]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][3]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][4]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][5]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][6]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][7]
+                    // td &nbsp;
+                    //  d=results.matches.rows[inx][8]
+                    // td &nbsp;
+                    // td=results.matches.rows[inx][9]
+                    // td &nbsp;
+
+    
+  form(method='get', action='/team')
+      input(type='submit', value='Back to team')
